@@ -17,6 +17,11 @@ G-project aka Checkers game
 //as a user, i want the ability to..
 
 - start button to play
-- rotate the players turn
-- 
+- white moves first
+- move left or right and you can only go forward 
+- rotate the players turn (black turn)
+- capture piece by having an empty space to jump over a player
+- you can have multiple jumps over a player if there is a second piece availbe with an empty space behind it 
+-keep roating turns until you reach the other side of the board where you are safe
+-player with the most pices left and no more moves to be made by either party will be declared the winner
 [screenshot](IMG_8853.jpg)
