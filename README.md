@@ -12,3 +12,11 @@ G-project aka Checkers game
 //the board pices can also move over the opponets boards pices if they have an empty slot behind them and they will eliminate one of their board pices there could be more the one empty spot and you can eliminate more pices on the board jumping over them. 
 
 //how to win: once all the board pices are eliminated or blocked where the opponents cant make a move you will win the game.
+
+
+//as a user, i want the ability to..
+
+- start button to play
+- rotate the players turn
+- 
+[screenshot](IMG_8853.jpg)
