@@ -24,4 +24,11 @@ G-project aka Checkers game
 - you can have multiple jumps over a player if there is a second piece availbe with an empty space behind it 
 -keep roating turns until you reach the other side of the board where you are safe
 -player with the most pices left and no more moves to be made by either party will be declared the winner
+
+-
+
+
+
+
+
 ![screenshot](IMG_8853.jpg)
