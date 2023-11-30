@@ -1,8 +1,8 @@
-const squares = document.querySelectorAll('.square')
+
 const blueChecker = document.querySelectorAll('.blueChecker')
 const redChecker = document.querySelectorAll('.redChecker')
 const board = document.querySelectorAll('.box')
-
+// console.log('this is the board', board )
 // lets move the peices!!
 
 // blue checker -9 square c2r1 move to c3r0 || c3r2 
@@ -17,16 +17,17 @@ function initiate() {
           firstClick(event);
       });
   })
+  
 }
 
 function firstClick(event){
-  const first = event.target.id
-  const firstChild = first.children
-  const id = firstChild.id
-  console.log(id)
+  const first = event.target.id;
+  const firstChild = first.children;
+  const id = firstChild.id;
 
 }
-initiate()
+firstClick()
+
 // btn.addEventListener('click',()=>{
 //   parent.appendChild(child);
 // })
@@ -42,19 +43,19 @@ initiate()
 
 
 
-squares.forEach((square) => {
-  square.addEventListener('click',squareClicked)
-})
+// box.forEach((box) => {
+//   box.addEventListener('click',boxClicked)
+// })
 
 
-const startGame = () => {
-  squares.forEach((square) => {
-    console.log(square)
-    square.addEventListner('click', squareClicked)
-  })
-}
+// const startGame = () => {
+//   box.forEach((box) => {
+//     console.log(square)
+//     square.addEventListner('click', boxClicked)
+//   })
+// }
 
-function squareClicked(e) {
+function boxClicked(e) {
   const id = e.target.id
   // if(!squares[id]){
   //   squares[id] = currentPlayer
