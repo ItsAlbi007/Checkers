@@ -57,9 +57,9 @@ button{
 }
 
 .checker {
-  width: 25px;
-  height: 25px;
-  border-radius: 10px;
+  width: 6vmin;
+  height: 6vmin;
+  border-radius: 50%;
   position: absolute;
 }
 
