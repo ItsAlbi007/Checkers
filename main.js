@@ -36,7 +36,8 @@ let diagonalOne, diagonalTwo
 }
 
 
-
+// the extension ? is (...) ? "pass" : "fail"
+// also its a shorten  "if else" statement to one line of code
 function moveChecker(targetSquare, checker) {
   targetSquare.appendChild(checker)
   resetLastColor(checker.classList.contains("red") ? "red" : "blue")
@@ -48,19 +49,21 @@ function initiate() {
   board.forEach((box) => {
       box.addEventListener('click', (event)=>{
           firstClick(event);
-
+        console.log(initiate)
       });
   })
 
   redChecker.forEach((checker) => {
     checker.addEventListener('click', (event) => {
       firstClick(event)
+      console.log(redChecker)
     })
   })
 
   blueChecker.forEach((checker) => {
     checker.addEventListener('click', (event) => {
       firstClick(event)
+      console.log(blueChecker)
     })
   })
 }
