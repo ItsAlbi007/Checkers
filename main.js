@@ -36,6 +36,13 @@ let diagonalOne, diagonalTwo
 }
 
 
+
+function moveChecker(targetSquare, checker) {
+  targetSquare.appendChild(checker)
+  resetLastColor(checker.classList.contains("red") ? "red" : "blue")
+  console.log(moveChecker)
+}
+
 //Event listener intialization is to set up event listner on each square and then calls funciton to inilize the event listeners.
 function initiate() {
   board.forEach((box) => {
@@ -43,6 +50,18 @@ function initiate() {
           firstClick(event);
 
       });
+  })
+
+  redChecker.forEach((checker) => {
+    checker.addEventListener('click', (event) => {
+      firstClick(event)
+    })
+  })
+
+  blueChecker.forEach((checker) => {
+    checker.addEventListener('click', (event) => {
+      firstClick(event)
+    })
   })
 }
 initiate()
@@ -83,10 +102,12 @@ function firstClick(event){
 
       if (diagonalOne && diagonalOne.innerHTML === ""){
         diagonalOne.style.backgroundColor = "yellow"
+        diagonalOne.addEventListener("click", () => moveChecker(diagonalOne, checker))
       }
 
       if (diagonalTwo && diagonalTwo.innerHTML === "") {
         diagonalTwo.style.backgroundColor = "yellow"
+        diagonalTwo.addEventListener("click", () => moveChecker(diagonalTwo, checker))
       }
       // console.log(diagonalOne)
       // console.log(diagonalTwo)
@@ -101,11 +122,12 @@ function firstClick(event){
 
       if (diagonalOne && diagonalOne.innerHTML === "") {
         diagonalOne.style.backgroundColor = "yellow"
+        diagonalOne.addEventListener("click", () => moveChecker(diagonalOne, checker))
       }
 
       if (diagonalTwo && diagonalTwo.innerHTML === "") {
       diagonalTwo.style.backgroundColor = "yellow"
-
+      diagonalTwo.addEventListener("click", () => moveChecker(diagonalTwo, checker))
     }
   }
 } 
