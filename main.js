@@ -8,29 +8,42 @@ const board = document.querySelectorAll('.box')
 // blue checker -9 square c2r1 move to c3r0 || c3r2 
 
 
-const parent = document.getElementById('c2r1');
+
 const child = document.getElementById('blue-checker-9');
 
 function initiate() {
   board.forEach((box) => {
       box.addEventListener('click', (event)=>{
           firstClick(event);
+
       });
   })
-  
 }
+initiate()
 
 function firstClick(event){
+  console.log(event)
+  let checker
   const first = event.target.id;
-  const firstChild = first.children;
+  console.log(first)
+  const col = parseInt(first[1])
+  const row = parseInt(first[3])
+  const firstChild = event.target.children;
+  console.log(firstChild)
   const id = firstChild.id;
-
+  if (firstChild[0]){
+    checker = firstChild[0]
+    const diagonalOne = document.querySelector(`#c${col -1}r${row +1}`)
+    const diagonalTwo = document.querySelector(`#c${col -1}r${row -1}`)
+    console.log(diagonalOne)
+    console.log(diagonalTwo)
+  }
 }
-firstClick()
-
-// btn.addEventListener('click',()=>{
-//   parent.appendChild(child);
+// we completed clicking red now we need to focus on blue and switch diagonas for blue 
+// parent.addEventListener('click', (e) => {
+//   firstClick(e)
 // })
+
 
 
 
