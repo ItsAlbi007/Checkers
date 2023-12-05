@@ -2,7 +2,7 @@
 const blueChecker = document.querySelectorAll('.blueChecker')
 const redChecker = document.querySelectorAll('.redChecker')
 const board = document.querySelectorAll('.box')
-let playBtn = document.getElementById('playBtn')
+const playBtn = document.getElementById('playBtn')
 let diagonalOne, diagonalTwo, firstChecker, firstSquare, secondChecker, secondSquare
 let firstClick = true
 // console.log('this is the board', board )
@@ -12,19 +12,6 @@ let firstClick = true
 
 // Restlastcolorfunction resets the background color of diagonally adjacent squares for a given color either "RED" or "BLUE"
 
-playBtn.addEventListener('click', function resetGame(){
-  blueChecker.forEach(checker => checker.remove())
-  redChecker.forEach(checker => checker.remove())
-
-  resetLastColor("red")
-  resetLastColor("blue")
-
-  firstChecker = null
-  firstSquare = null
-  secondChecker = null
-  secondSquare = null
-  firstClick = true
-})
 
 function resetLastColor(color){
   if(firstChecker) {
@@ -53,7 +40,6 @@ function resetLastColor(color){
 // the extension ? is (...) ? "pass" : "fail"
 // also its a shorten  "if else" statement to one line of code
 function moveChecker(targetSquare) {
-  console.dir(targetSquare.innerHTML)
   if (targetSquare.innerHTML === ""){
     targetSquare.appendChild(firstChecker)
     resetLastColor(firstChecker.classList.contains("red") ? "red" : "blue")
@@ -63,6 +49,47 @@ function moveChecker(targetSquare) {
   }
 }
 
+function removeEnemy(square){
+  const col = parseInt(square.id[1])
+  const row = parseInt(square.id[3])
+   let diagonalRight
+   let diagonalLeft
+  if(firstSquare.id[1] > col){
+    diagonalRight = document.querySelector(`#c${col - 1}r${row - 1}`)
+    console.log(square.id)
+    console.log(firstSquare.id)
+    console.log(diagonalRight.id)
+    if (diagonalRight.innerHTML === ""){
+    diagonalRight.style.backgroundColor = "yellow"
+    }
+  } else {
+    diagonalLeft = document.querySelector(`#c${col + 1}r${row - 1}`)
+    console.log(col)
+    console.log(firstSquare.id)
+    console.log(diagonalLeft.id)
+    if (diagonalLeft.innerHTML === ""){
+    diagonalLeft.style.backgroundColor = "yellow"
+    }
+  } 
+}
+
+// function removeEnemy(square){
+//   const col = parseInt(square.id[1])
+//   const row = parseInt(square.id[3])
+//   const diagonalOne = document.querySelector(`#c${col -1}r${row +1}`)
+//   const diagonalTwo = document.querySelector(`#c${col -1}r${row -1}`)
+//   const childOne = diagonalOne.children[0]
+//   const childTwo = diagonalTwo.children[0]
+//   console.dir(diagonalOne)
+//   if (diagonalOne.children[0]){
+//     const childOneCol = parseInt(childOne.id[1])
+//     const childOneRow = parseInt(childOne.id[3])
+//     const childDiagOne = document.querySelector(`#c${col -1}r${row +1}`)
+//     const childDiagTwo = document.querySelector(`#c${col -1}r${row -1}`)
+//     console.log(childDiagOne)
+//     console.log(childDiagTwo)
+//   } 
+// }
 
 //Event listener intialization is to set up event listner on each square and then calls funciton to inilize the event listeners.
 function initiate() {
@@ -117,16 +144,23 @@ function handleClick(event){
       const row = parseInt(firstSquare.id[3])
       const diagonalOne = document.querySelector(`#c${col -1}r${row +1}`)
       const diagonalTwo = document.querySelector(`#c${col -1}r${row -1}`)
-        console.dir(diagonalOne)
-        console.dir(diagonalTwo)
+
       if (diagonalOne && diagonalOne.innerHTML === ""){
         diagonalOne.style.backgroundColor = "yellow"
         diagonalOne.addEventListener("click",function handler(){moveChecker(diagonalOne)})
+
+      } else if(diagonalOne && diagonalOne.children[0]) {
+       
+        removeEnemy(diagonalOne)
       }
 
       if (diagonalTwo && diagonalTwo.innerHTML === "") {
         diagonalTwo.style.backgroundColor = "yellow"
         diagonalTwo.addEventListener("click",function handler(){moveChecker(diagonalTwo)})
+        
+      } else if  (diagonalTwo && diagonalTwo.children[0]) {
+       
+        removeEnemy(diagonalTwo)
       }
 
   } else if (firstChecker && firstChecker.classList.contains("blue")){
@@ -152,3 +186,20 @@ function handleClick(event){
 
 // THE BUGG WHERE THERE IS NO  BOX ON LEFT OR RIGHT COMES UP AS AN ERROR!!!
 // we completed clicking red now we need to focus on blue and switch diagonas for blue 
+
+
+
+// playBtn.addEventListener("click", function resetGame(){
+//   console.log(playBtn)
+//   blueChecker.forEach(checker => checker.remove())
+//   redChecker.forEach(checker => checker.remove())
+
+//   resetLastColor("red")
+//   resetLastColor("blue")
+
+//   firstChecker = ""
+//   firstSquare = ""
+//   secondChecker = ""
+//   secondSquare = ""
+//   firstClick = true
+// })
