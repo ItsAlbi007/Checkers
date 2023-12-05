@@ -54,42 +54,47 @@ function removeEnemy(square){
   const row = parseInt(square.id[3])
    let diagonalRight
    let diagonalLeft
-  if(firstSquare.id[1] > col){
-    diagonalRight = document.querySelector(`#c${col - 1}r${row - 1}`)
-    console.log(square.id)
-    console.log(firstSquare.id)
-    console.log(diagonalRight.id)
+   if(firstChecker.classList.contains("red")){
+   if(firstSquare.id[3] < row){
+    diagonalRight = document.querySelector(`#c${col - 1}r${row + 1}`)
+    console.log("right",square.id)
+    console.log("right",firstSquare.id)
+    console.log("right",diagonalRight.id)
     if (diagonalRight.innerHTML === ""){
     diagonalRight.style.backgroundColor = "yellow"
+    diagonalRight.addEventListener("click", () => moveChecker(diagonalRight))
     }
   } else {
-    diagonalLeft = document.querySelector(`#c${col + 1}r${row - 1}`)
-    console.log(col)
-    console.log(firstSquare.id)
-    console.log(diagonalLeft.id)
+    diagonalLeft = document.querySelector(`#c${col - 1}r${row - 1}`)
+    console.log("left",square.id)
+    console.log("left",firstSquare.id)
+    console.log("left",diagonalLeft.id)
     if (diagonalLeft.innerHTML === ""){
     diagonalLeft.style.backgroundColor = "yellow"
+    diagonalLeft.addEventListener("click", () => moveChecker(diagonalLeft))
     }
-  } 
-}
-
-// function removeEnemy(square){
-//   const col = parseInt(square.id[1])
-//   const row = parseInt(square.id[3])
-//   const diagonalOne = document.querySelector(`#c${col -1}r${row +1}`)
-//   const diagonalTwo = document.querySelector(`#c${col -1}r${row -1}`)
-//   const childOne = diagonalOne.children[0]
-//   const childTwo = diagonalTwo.children[0]
-//   console.dir(diagonalOne)
-//   if (diagonalOne.children[0]){
-//     const childOneCol = parseInt(childOne.id[1])
-//     const childOneRow = parseInt(childOne.id[3])
-//     const childDiagOne = document.querySelector(`#c${col -1}r${row +1}`)
-//     const childDiagTwo = document.querySelector(`#c${col -1}r${row -1}`)
-//     console.log(childDiagOne)
-//     console.log(childDiagTwo)
-//   } 
-// }
+    }
+  } else if (firstChecker.classList.contains("blue")){
+  if(firstSquare.id[3] < row){
+    diagonalRight = document.querySelector(`#c${col + 1}r${row + 1}`)
+    console.log("right",square.id)
+    console.log("right",firstSquare.id)
+    console.log("right",diagonalRight.id)
+    if(diagonalRight.innerHTML === ""){
+      diagonalRight.style.backgroundColor = "yellow"
+      diagonalRight.addEventListener("click", () => moveChecker(diagonalRight))
+     }
+   } else { diagonalLeft = document.querySelector(`#c${col + 1}r${row - 1}`)
+      console.log("left",square.id)
+      console.log("left",firstSquare.id)
+      console.log("left",diagonalLeft.id)
+      if(diagonalLeft.innerHTML === ""){
+        diagonalLeft.style.backgroundColor = "yellow"
+        diagonalLeft.addEventListener("click", () => moveChecker(diagonalLeft))
+      }
+    }
+   }
+  }
 
 //Event listener intialization is to set up event listner on each square and then calls funciton to inilize the event listeners.
 function initiate() {
@@ -177,6 +182,9 @@ function handleClick(event){
       if (diagonalTwo && diagonalTwo.innerHTML === "") {
       diagonalTwo.style.backgroundColor = "yellow"
       diagonalTwo.addEventListener("click", () => moveChecker(diagonalTwo))
+    } else if (diagonaTwo && diagonalTwo.children[0]){
+
+      removeEnemy(diagonalTwo)
     }
   }
   firstClick = !firstClick
