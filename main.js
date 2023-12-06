@@ -68,6 +68,7 @@ function checkForSkip(square){
         diagonalRight.style.backgroundColor = "yellow"
         diagonalRight.addEventListener("click", () => {
           moveChecker(diagonalRight)
+          diagonalRight.style.backgroundColor = "white"
           removeChecker(square)})
       }
     } else {
@@ -76,6 +77,7 @@ function checkForSkip(square){
         diagonalLeft.style.backgroundColor = "yellow"
         diagonalLeft.addEventListener("click", () => {
           moveChecker(diagonalLeft)
+          diagonalLeft.style.backgroundColor = "white"
           removeChecker(square)})
       }
     } 
@@ -86,7 +88,9 @@ function checkForSkip(square){
         diagonalRight.style.backgroundColor = "yellow"
         diagonalRight.addEventListener("click", () => {
           moveChecker(diagonalRight)
-          removeChecker(square)})      }
+          diagonalRight.style.backgroundColor = "white"
+          removeChecker(square)})
+        }
     } else {
       diagonalLeft = document.querySelector(`#c${col + 1}r${row - 1}`)
       console.log("left",square.id)
@@ -96,7 +100,9 @@ function checkForSkip(square){
         diagonalLeft.style.backgroundColor = "yellow"
         diagonalLeft.addEventListener("click", () => {
           moveChecker(diagonalLeft)
-          removeChecker(square)})      }
+          diagonalLeft.style.backgroundColor = "white"
+          removeChecker(square)})
+      }
     } 
   }
 }
@@ -216,11 +222,13 @@ function handleClick(event){
   firstClick = !firstClick
   checkWinner()
 } 
-
 playBtn.addEventListener("click", function() {
   location.reload()
   console.log("clicked")
 })
+
+
+
 
 // next step moving checkers!!
 
