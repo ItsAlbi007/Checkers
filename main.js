@@ -1,8 +1,10 @@
-
-const blueChecker = document.querySelectorAll('.blueChecker')
-const redChecker = document.querySelectorAll('.redChecker')
+let blueChecker = document.querySelectorAll('.blue')
+let redChecker = document.querySelectorAll('.red')
 const board = document.querySelectorAll('.box')
 const playBtn = document.getElementById('playBtn')
+const winnerDisplay = document.querySelector('.winnerDisplay')
+
+
 let diagonalOne, diagonalTwo, firstChecker, firstSquare, secondChecker, secondSquare
 let firstClick = true
 // console.log('this is the board', board )
@@ -49,52 +51,73 @@ function moveChecker(targetSquare) {
   }
 }
 
-function removeEnemy(square){
+function removeChecker(square){
+  square.innerHTML = ""
+  console.log('removed')
+}
+
+function checkForSkip(square){
   const col = parseInt(square.id[1])
   const row = parseInt(square.id[3])
    let diagonalRight
    let diagonalLeft
    if(firstChecker.classList.contains("red")){
-   if(firstSquare.id[3] < row){
-    diagonalRight = document.querySelector(`#c${col - 1}r${row + 1}`)
-    console.log("right",square.id)
-    console.log("right",firstSquare.id)
-    console.log("right",diagonalRight.id)
-    if (diagonalRight.innerHTML === ""){
-    diagonalRight.style.backgroundColor = "yellow"
-    diagonalRight.addEventListener("click", () => moveChecker(diagonalRight))
-    }
-  } else {
-    diagonalLeft = document.querySelector(`#c${col - 1}r${row - 1}`)
-    console.log("left",square.id)
-    console.log("left",firstSquare.id)
-    console.log("left",diagonalLeft.id)
-    if (diagonalLeft.innerHTML === ""){
-    diagonalLeft.style.backgroundColor = "yellow"
-    diagonalLeft.addEventListener("click", () => moveChecker(diagonalLeft))
-    }
-    }
+    if(firstSquare.id[3] < row){
+      diagonalRight = document.querySelector(`#c${col - 1}r${row + 1}`)
+      if (diagonalRight.innerHTML === ""){
+        diagonalRight.style.backgroundColor = "yellow"
+        diagonalRight.addEventListener("click", () => {
+          moveChecker(diagonalRight)
+          removeChecker(square)})
+      }
+    } else {
+      diagonalLeft = document.querySelector(`#c${col - 1}r${row - 1}`)
+      if (diagonalLeft.innerHTML === ""){
+        diagonalLeft.style.backgroundColor = "yellow"
+        diagonalLeft.addEventListener("click", () => {
+          moveChecker(diagonalLeft)
+          removeChecker(square)})
+      }
+    } 
   } else if (firstChecker.classList.contains("blue")){
-  if(firstSquare.id[3] < row){
-    diagonalRight = document.querySelector(`#c${col + 1}r${row + 1}`)
-    console.log("right",square.id)
-    console.log("right",firstSquare.id)
-    console.log("right",diagonalRight.id)
-    if(diagonalRight.innerHTML === ""){
-      diagonalRight.style.backgroundColor = "yellow"
-      diagonalRight.addEventListener("click", () => moveChecker(diagonalRight))
-     }
-   } else { diagonalLeft = document.querySelector(`#c${col + 1}r${row - 1}`)
+    if(firstSquare.id[3] < row){
+      diagonalRight = document.querySelector(`#c${col + 1}r${row + 1}`)
+      if (diagonalRight?.innerHTML === ""){
+        diagonalRight.style.backgroundColor = "yellow"
+        diagonalRight.addEventListener("click", () => {
+          moveChecker(diagonalRight)
+          removeChecker(square)})      }
+    } else {
+      diagonalLeft = document.querySelector(`#c${col + 1}r${row - 1}`)
       console.log("left",square.id)
       console.log("left",firstSquare.id)
       console.log("left",diagonalLeft.id)
-      if(diagonalLeft.innerHTML === ""){
+      if (diagonalLeft.innerHTML === ""){
         diagonalLeft.style.backgroundColor = "yellow"
-        diagonalLeft.addEventListener("click", () => moveChecker(diagonalLeft))
-      }
-    }
-   }
+        diagonalLeft.addEventListener("click", () => {
+          moveChecker(diagonalLeft)
+          removeChecker(square)})      }
+    } 
   }
+}
+
+function checkWinner () {
+  console.log(blueChecker)
+  console.log(redChecker)
+  console.log(winnerDisplay)
+  blueChecker = document.querySelectorAll('.blue')
+  redChecker = document.querySelectorAll('.red')
+  if (blueChecker.length === 0){
+    winnerDisplay.innerText = "Red Wins"
+    console.log("red wins")
+    return
+  } else if (redChecker.length === 0){
+    winnerDisplay.innerText = "Blue Wins"
+    console.log("blue wins")
+    return
+  }
+  console.log("No one wins")
+}
 
 //Event listener intialization is to set up event listner on each square and then calls funciton to inilize the event listeners.
 function initiate() {
@@ -156,7 +179,7 @@ function handleClick(event){
 
       } else if(diagonalOne && diagonalOne.children[0]) {
        
-        removeEnemy(diagonalOne)
+        checkForSkip(diagonalOne)
       }
 
       if (diagonalTwo && diagonalTwo.innerHTML === "") {
@@ -165,7 +188,7 @@ function handleClick(event){
         
       } else if  (diagonalTwo && diagonalTwo.children[0]) {
        
-        removeEnemy(diagonalTwo)
+        checkForSkip(diagonalTwo)
       }
 
   } else if (firstChecker && firstChecker.classList.contains("blue")){
@@ -177,37 +200,29 @@ function handleClick(event){
       if (diagonalOne && diagonalOne.innerHTML === "") {
         diagonalOne.style.backgroundColor = "yellow"
         diagonalOne.addEventListener("click", () => moveChecker(diagonalOne))
+      } else if(diagonalOne && diagonalOne.children[0]) {
+       
+        checkForSkip(diagonalOne)
       }
 
       if (diagonalTwo && diagonalTwo.innerHTML === "") {
       diagonalTwo.style.backgroundColor = "yellow"
       diagonalTwo.addEventListener("click", () => moveChecker(diagonalTwo))
-    } else if (diagonaTwo && diagonalTwo.children[0]){
-
-      removeEnemy(diagonalTwo)
+    }else if(diagonalTwo && diagonalTwo.children[0]) {
+       
+      checkForSkip(diagonalTwo)
     }
   }
   firstClick = !firstClick
+  checkWinner()
 } 
+
+playBtn.addEventListener("click", function() {
+  location.reload()
+  console.log("clicked")
+})
 
 // next step moving checkers!!
 
 // THE BUGG WHERE THERE IS NO  BOX ON LEFT OR RIGHT COMES UP AS AN ERROR!!!
 // we completed clicking red now we need to focus on blue and switch diagonas for blue 
-
-
-
-// playBtn.addEventListener("click", function resetGame(){
-//   console.log(playBtn)
-//   blueChecker.forEach(checker => checker.remove())
-//   redChecker.forEach(checker => checker.remove())
-
-//   resetLastColor("red")
-//   resetLastColor("blue")
-
-//   firstChecker = ""
-//   firstSquare = ""
-//   secondChecker = ""
-//   secondSquare = ""
-//   firstClick = true
-// })
