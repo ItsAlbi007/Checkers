@@ -1,3 +1,5 @@
+                                        CHECKERS
+
 G-project aka Checkers game
 // building a checkers game involves having a board with 64 squares (8x8) and alternating dark and light color.
 
@@ -32,3 +34,5 @@ G-project aka Checkers game
 
 
 ![screenshot](IMG_8853.jpg)
+
+![Alt text](<Screenshot 2023-12-07 092508.png>)
